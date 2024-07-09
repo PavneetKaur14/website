@@ -1,0 +1,227 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Games</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #0581ba;
+            color: #0a0909;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-size: 3em;
+            margin: 10px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            text-decoration: none;
+            font-size: 1.2em;
+            color: #00435e;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        nav ul li a:hover {
+            background-color: rgb(17, 92, 102);
+            color: white;
+        }
+        #img-cont {
+            background-image: url('/image/mathsb.webp');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: white;
+            padding: 40px 20px;
+            margin: 30px auto;
+            width: 80%;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        #game-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #game-container button {
+            background-color: #696574;
+            color: rgb(14, 12, 12);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #game-container button:hover {
+            background-color: #33a7ff;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #dbc6c6;
+            color: #100f0f;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            #img-cont {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Math Games</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="science.html">Science</a></li>
+                <li><a href="language-arts.html">Language Arts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="img-cont">
+        <h2>Math Game: Quiz</h2>
+        <div id="game-container">
+            <p id="question"></p>
+            <form id="options-form">
+                <!-- Options will be dynamically added here -->
+            </form>
+            <button onclick="checkAnswer()">Submit</button>
+            <p id="feedback"></p>
+        </div>
+    </main>
+    <footer>
+        
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        const questions = [
+            { question: "What is the value of π (pi)?", options: ["3.14", "2.71", "1.61", "4.21"], answer: "3.14" },
+            { question: "Which of these is a prime number: 27, 29, 33, 35?", options: ["27", "29", "33", "35"], answer: "29" },
+            { question: "What is the value of the square root of 144?", options: ["10", "11", "12", "13"], answer: "12" },
+            { question: "What is 25% of 80?", options: ["10", "15", "20", "25"], answer: "20" },
+            { question: "What is the perimeter of a rectangle with length 6 meters and width 5 meters?", options: ["16 meters", "22 meters", "26 meters", "30 meters"], answer: "22 meters" },
+            { question: "What is the next number in the sequence: 2, 5, 10, 17, 26, ... ?", options: ["35", "36", "37", "38"], answer: "37" },
+            { question: "Simplify: 3x + 2x - 5", options: ["5x", "4x", "3x", "2x"], answer: "5x" },
+            { question: "What is the largest common factor of 24 and 36?", options: ["4", "6", "8", "12"], answer: "12" },
+            { question: "If a = 5 and b = 3, what is the value of 2a + 3b?", options: ["13", "16", "19", "22"], answer: "19" },
+            { question: "What is the area of a triangle with base 8 cm and height 6 cm?", options: ["24 square cm", "28 square cm", "30 square cm", "32 square cm"], answer: "24 square cm" },
+            { question: "Which of these is an obtuse angle: 90°, 120°, 45°, 60°?", options: ["90°", "120°", "45°", "60°"], answer: "120°" },
+            { question: "What is the volume of a cube with side length 3 cm?", options: ["18 cubic cm", "24 cubic cm", "27 cubic cm", "36 cubic cm"], answer: "27 cubic cm" },
+            { question: "Solve for x: 2x + 5 = 15", options: ["5", "7", "8", "10"], answer: "5" },
+            { question: "What is the sum of the interior angles of a triangle?", options: ["90°", "180°", "270°", "360°"], answer: "180°" },
+            { question: "If a car travels at 60 km/h for 3 hours, how far does it travel?", options: ["120 km", "160 km", "180 km", "200 km"], answer: "180 km" }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        function displayQuestion() {
+            const questionElement = document.getElementById('question');
+            const optionsForm = document.getElementById('options-form');
+            const feedback = document.getElementById('feedback');
+
+            questionElement.textContent = questions[currentQuestionIndex].question;
+            feedback.textContent = '';
+
+            // Clear previous options
+            while (optionsForm.firstChild) {
+                optionsForm.removeChild(optionsForm.firstChild);
+            }
+
+            // Add options
+            questions[currentQuestionIndex].options.forEach(option => {
+                const label = document.createElement('label');
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'answer';
+                radio.value = option;
+                label.appendChild(radio);
+                label.appendChild(document.createTextNode(` ${option}`));
+                optionsForm.appendChild(label);
+                optionsForm.appendChild(document.createElement('br'));
+            });
+        }
+
+        function checkAnswer() {
+            const options = document.getElementsByName('answer');
+            let selectedOption = null;
+
+            for (const option of options) {
+                if (option.checked) {
+                    selectedOption = option.value;
+                    break;
+                }
+            }
+
+            if (!selectedOption) {
+                alert('Please select an answer!');
+                return;
+            }
+
+            const feedback = document.getElementById('feedback');
+            if (selectedOption === questions[currentQuestionIndex].answer) {
+                feedback.textContent = 'Correct!';
+                feedback.style.color = 'green';
+                nextQuestion();
+            } else {
+                feedback.textContent = 'Try again!';
+                feedback.style.color = 'red';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex >= questions.length) {
+                currentQuestionIndex = 0; // Loop back to the first question
+            }
+            setTimeout(displayQuestion, 1000); // Display the next question after 1 second
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            displayQuestion();
+
+            document.getElementById('options-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                checkAnswer();
+            });
+        });
+    </script>
+</body>
+</html>
