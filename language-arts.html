@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Arts Games</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6f7ff;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #060a2b;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3em;
+            margin: 10px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            text-decoration: none;
+            font-size: 1.2em;
+            color: #c35d7f;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        nav ul li a:hover {
+            background-color:  #009c87;
+            color: #fff;
+        }
+        #img-cont {
+            background-image: url('/image/arts.webp');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: white;
+            padding: 40px 20px;
+            margin: 30px auto;
+            width: 80%;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        #game-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #game-container button {
+            background-color: #00bfa5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #game-container button:hover {
+            background-color: #009c87;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            #img-cont {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Language Arts Games</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="maths.html">Math</a></li>
+                <li><a href="science.html">Science</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="img-cont">
+        <h2>Language Arts Game: Vocabulary Quiz</h2>
+        <div id="game-container">
+            <p id="question"></p>
+            <form id="options-form">
+                <!-- Options will be dynamically added here -->
+            </form>
+            <button onclick="checkAnswer()">Submit</button>
+            <p id="feedback"></p>
+        </div>
+    </main>
+    <footer>
+        
+    </footer>
+    <script src="scripts.js"></script>
+    <script>
+        const questions = [
+            { question: "What is the synonym of 'happy'?", options: ["Joyful", "Sad", "Excited", "Angry"], answer: "Joyful" },
+            { question: "What is the antonym of 'hot'?", options: ["Cold", "Warm", "Cool", "Freezing"], answer: "Cold" },
+            { question: "What is the plural of 'child'?", options: ["Children", "Childs", "Childers", "Childen"], answer: "Children" },
+            { question: "What is the past tense of 'run'?", options: ["Ran", "Runned", "Running", "Runned"], answer: "Ran" },
+            { question: "What is a word that means the same as 'big'?", options: ["Large", "Small", "Huge", "Tiny"], answer: "Large" },
+            { question: "What is the antonym of 'up'?", options: ["Down", "High", "Above", "Tall"], answer: "Down" },
+            { question: "What is the plural form of 'mouse'?", options: ["Mice", "Mouses", "Micees", "Meese"], answer: "Mice" },
+            { question: "What is a word that means the opposite of 'old'?", options: ["Young", "Ancient", "Elderly", "Antique"], answer: "Young" },
+            { question: "What is the past tense of 'eat'?", options: ["Ate", "Eated", "Eaten", "Aated"], answer: "Ate" },
+            { question: "What is a synonym for 'smart'?", options: ["Intelligent", "Dull", "Bright", "Stupid"], answer: "Intelligent" },
+            { question: "What is the plural of 'goose'?", options: ["Geese", "Gooses", "Geeses", "Gees"], answer: "Geese" },
+            { question: "What is a word that means the opposite of 'fast'?", options: ["Slow", "Quick", "Rapid", "Speedy"], answer: "Slow" },
+            { question: "What is a synonym for 'beautiful'?", options: ["Gorgeous", "Ugly", "Pretty", "Plain"], answer: "Pretty" },
+            { question: "What is the plural form of 'cactus'?", options: ["Cacti", "Cactuses", "Cactuss", "Cactussies"], answer: "Cacti" },
+            { question: "What is the past tense of 'write'?", options: ["Wrote", "Written", "Writed", "Writted"], answer: "Wrote" }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        function displayQuestion() {
+            const questionElement = document.getElementById('question');
+            const optionsForm = document.getElementById('options-form');
+            const feedback = document.getElementById('feedback');
+
+            questionElement.textContent = questions[currentQuestionIndex].question;
+            feedback.textContent = '';
+
+            // Clear previous options
+            while (optionsForm.firstChild) {
+                optionsForm.removeChild(optionsForm.firstChild);
+            }
+
+            // Add options
+            questions[currentQuestionIndex].options.forEach(option => {
+                const label = document.createElement('label');
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'answer';
+                radio.value = option;
+                label.appendChild(radio);
+                label.appendChild(document.createTextNode(` ${option}`));
+                optionsForm.appendChild(label);
+                optionsForm.appendChild(document.createElement('br'));
+            });
+        }
+
+        function checkAnswer() {
+            const options = document.getElementsByName('answer');
+            let selectedOption = null;
+
+            for (const option of options) {
+                if (option.checked) {
+                    selectedOption = option.value;
+                    break;
+                }
+            }
+
+            if (!selectedOption) {
+                alert('Please select an answer!');
+                return;
+            }
+
+            const feedback = document.getElementById('feedback');
+            if (selectedOption === questions[currentQuestionIndex].answer) {
+                feedback.textContent = 'Correct!';
+                feedback.style.color = 'green';
+                nextQuestion();
+            } else {
+                feedback.textContent = 'Try again!';
+                feedback.style.color = 'red';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex >= questions.length) {
+                currentQuestionIndex = 0; // Loop back to the first question
+            }
+            setTimeout(displayQuestion, 1000); // Display the next question after 1 second
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            displayQuestion();
+
+            document.getElementById('options-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                checkAnswer();
+            });
+        });
+    </script>
+</body>
+</html>
