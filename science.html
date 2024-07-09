@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Games</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e6f7ff;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #00bfa5;
+            color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3em;
+            margin: 10px 0;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            text-decoration: none;
+            font-size: 1.2em;
+            color: #00bfa5;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        nav ul li a:hover {
+            background-color: #1b3b43;
+            color: #fff;
+        }
+        #img-cont {
+            background-image: url('/image/science.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: white;
+            padding: 40px 20px;
+            margin: 30px auto;
+            width: 80%;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        #game-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #game-container button {
+            background-color: #00bfa5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #game-container button:hover {
+            background-color: #1b3b43;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #dbd0d0;
+            color: #110e0e;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            #img-cont {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Science Games</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="maths.html">Math</a></li>
+                <li><a href="language-arts.html">Language Arts</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="img-cont">
+        <h2>Science Game: Quiz</h2>
+        <div id="game-container">
+            <p id="question"></p>
+            <form id="options-form">
+                <!-- Options will be dynamically added here -->
+            </form>
+            <button onclick="checkAnswer()">Submit</button>
+            <p id="feedback"></p>
+        </div>
+    </main>
+    <footer>
+       
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        const questions = [
+            { question: "Which gas do plants absorb from the atmosphere?", options: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"], answer: "Carbon dioxide" },
+            { question: "What is the hardest substance found in the human body?", options: ["Enamel", "Bone", "Tooth", "Hair"], answer: "Enamel" },
+            { question: "What is the process by which plants make their own food?", options: ["Respiration", "Photosynthesis", "Fermentation", "Digestion"], answer: "Photosynthesis" },
+            { question: "Which planet is known as the Red Planet?", options: ["Earth", "Jupiter", "Mars", "Saturn"], answer: "Mars" },
+            { question: "Which of these is not a type of cloud: Cumulus, Stratus, Cirrus, Nebula?", options: ["Cumulus", "Stratus", "Cirrus", "Nebula"], answer: "Nebula" },
+            { question: "What is the basic unit of life?", options: ["Cell", "Molecule", "Atom", "Gene"], answer: "Cell" },
+            { question: "Which of these is a mammal: Shark, Dolphin, Tuna, Octopus?", options: ["Shark", "Dolphin", "Tuna", "Octopus"], answer: "Dolphin" },
+            { question: "What causes tides in the oceans?", options: ["Wind", "Earth's rotation", "Gravitational pull of the moon", "Underwater earthquakes"], answer: "Gravitational pull of the moon" },
+            { question: "What is the process of converting water vapor into liquid water?", options: ["Sublimation", "Condensation", "Evaporation", "Precipitation"], answer: "Condensation" },
+            { question: "What is the largest organ in the human body?", options: ["Heart", "Liver", "Skin", "Brain"], answer: "Skin" },
+            { question: "Which element has the chemical symbol 'H'?", options: ["Hydrogen", "Helium", "Carbon", "Oxygen"], answer: "Hydrogen" },
+            { question: "What is the chemical formula for water?", options: ["CO2", "H2O", "O2", "NaCl"], answer: "H2O" },
+            { question: "Which force holds the planets in orbit around the sun?", options: ["Magnetic force", "Gravitational force", "Electrical force", "Centrifugal force"], answer: "Gravitational force" },
+            { question: "What is the Earth's primary source of energy?", options: ["Wind", "Coal", "Solar radiation", "Geothermal heat"], answer: "Solar radiation" },
+            { question: "Which part of the plant absorbs water and nutrients from the soil?", options: ["Roots", "Stem", "Leaves", "Flowers"], answer: "Roots" }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        function displayQuestion() {
+            const questionElement = document.getElementById('question');
+            const optionsForm = document.getElementById('options-form');
+            const feedback = document.getElementById('feedback');
+
+            questionElement.textContent = questions[currentQuestionIndex].question;
+            feedback.textContent = '';
+
+            // Clear previous options
+            while (optionsForm.firstChild) {
+                optionsForm.removeChild(optionsForm.firstChild);
+            }
+
+            // Add options
+            questions[currentQuestionIndex].options.forEach(option => {
+                const label = document.createElement('label');
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'answer';
+                radio.value = option;
+                label.appendChild(radio);
+                label.appendChild(document.createTextNode(` ${option}`));
+                optionsForm.appendChild(label);
+                optionsForm.appendChild(document.createElement('br'));
+            });
+        }
+
+        function checkAnswer() {
+            const options = document.getElementsByName('answer');
+            let selectedOption = null;
+
+            for (const option of options) {
+                if (option.checked) {
+                    selectedOption = option.value;
+                    break;
+                }
+            }
+
+            if (!selectedOption) {
+                alert('Please select an answer!');
+                return;
+            }
+
+            const feedback = document.getElementById('feedback');
+            if (selectedOption === questions[currentQuestionIndex].answer) {
+                feedback.textContent = 'Correct!';
+                feedback.style.color = 'green';
+                nextQuestion();
+            } else {
+                feedback.textContent = 'Try again!';
+                feedback.style.color = 'red';
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex >= questions.length) {
+                currentQuestionIndex = 0; // Loop back to the first question
+            }
+            setTimeout(displayQuestion, 1000); // Display the next question after 1 second
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            displayQuestion();
+
+            document.getElementById('options-form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                checkAnswer();
+            });
+        });
+    </script>
+</body>
+</html>
